@@ -1,35 +1,59 @@
 # Invera ToDo-List Challenge (Python/Django Jr-SSr)
 
-El propósito de esta prueba es conocer tu capacidad para crear una pequeña aplicación funcional en un límite de tiempo. A continuación, encontrarás las funciones, los requisitos y los puntos clave que debés tener en cuenta durante el desarrollo.
 
-## Qué queremos que hagas:
+> **_IMPORTANTE!!!:_**  EN EL ARCHIVO Consultas Insomnia.json SE ENCUENTRAN TODAS LAS CONSULTAS EN FORMATO JSON PARA IMPORTAR DIRECTAMENTE EN INSOMNIA Y HACER TODAS LAS CONSULTAS DESDE LA HERRAMIENTA DE PETICIONES
 
-- El Challenge consiste en crear una aplicación web sencilla que permita a los usuarios crear y mantener una lista de tareas.
-- La entrega del resultado será en un nuevo fork de este repo y deberás hacer una pequeña demo del funcionamiento y desarrollo del proyecto ante un super comité de las más grandes mentes maestras de Invera, o a un par de devs, lo que sea más fácil de conseguir.
-- Podes contactarnos en caso que tengas alguna consulta.
+---
 
-## Objetivos:
+# Lenguaje y librerias usadas :notebook_with_decorative_cover:
 
-El usuario de la aplicación tiene que ser capaz de:
+<ol>
+  <li>Python</li>
+  <li>djangorestframework</li>
+</ol>
 
-- Crear una tarea
-- Eliminar una tarea
-- Marcar tareas como completadas
-- Poder ver una lista de todas las tareas existentes
-- Filtrar/buscar tareas por fecha de creación y/o por el contenido de la misma
+# ¿Como levantar la api? :rocket:
 
-## Qué evaluamos:
+Se debe crear un virtual env con las librerias colocadas en el archivo requirements.txt. 
 
-- Desarrollo utilizando Python, Django. No es necesario crear un Front-End, pero sí es necesario tener una API que permita cumplir con los objetivos de arriba.
-- Calidad y arquitectura de código. Facilidad de lectura y mantenimiento del código. Estándares seguidos.
-- [Bonus] Manejo de logs.
-- [Bonus] Creación de tests (unitarias y de integración)
-- [Bonus] Unificar la solución propuesta en una imagen de Docker por repositorio para poder ser ejecutada en cualquier ambiente (si aplica para full stack).
+Luego ejecutar este comando:
 
-## Requerimientos de entrega:
+`python manage.py runserver`
 
-- Hacer un fork del proyecto y pushearlo en github. Puede ser privado.
-- La solución debe correr correctamente.
-- El Readme debe contener todas las instrucciones para poder levantar la aplicación, en caso de ser necesario, y explicar cómo se usa.
-- Disponibilidad para realizar una pequeña demo del proyecto al finalizar el challenge.
-- Tiempo para la entrega: Aproximadamente 7 días.
+# ¿Como probar la api? :test_tube:
+
+Se dejo un archivo .json con las consultas ya hechas en Insomnia. Solo debe importarse ese archivo en insomnia y las consultas pueden generarse desde ahi.
+
+Tambien se pueden probar utilizando curl, estos son algunos ejemplos:
+
+### Get list
+`curl http://127.0.0.1:8000/todoList/`
+
+### Insert List
+
+`curl http://127.0.0.1:8000/todoList/ --request POST --header "Content-Type: application/json" --data "{\"description\":\"prueba\"}"`
+
+### Delete Lista
+
+`curl http://localhost:8000/deleteTodoList/1/ --request DELETE`
+
+
+# ¿Como testear la aplicacion? :alembic:
+
+Se debe ejecutar el comando 
+
+`python manage.py test`
+
+Dentro del archivo test que se encuentra en la carpeta todoList, se encuentran tests unitarios.
+
+# ¿Como ejecutar el dockerfile? :whale:
+
+Se dejo un Dockerfile para poder ejecutar la api en cualquier SO.
+Se deben ejecutar los siguientes comandos:
+`docker run -it nombreimagen .`
+`docker build -t nombre_imagen`
+
+
+# ¿Donde ver los logs? :notebook_with_decorative_cover:
+
+Luego de ejecutar se vera un archivo debug.log
