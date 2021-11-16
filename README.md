@@ -10,17 +10,20 @@
 <ol>
   <li>Python</li>
   <li>djangorestframework</li>
+  <li>django-rest-swagger</li>
 </ol>
 
 # ¿Como levantar la api? :rocket:
 
 Se debe crear un virtual env con las librerias colocadas en el archivo requirements.txt. 
+En caso de que el requirements no este actualizado se deben instalar las librerias django-rest-swagger y djangorestframework.
 
 Luego ejecutar estos comandos:
 
 `python manage.py makemigration`
 `python manage.py migrate`
 `python manage.py runserver`
+
 
 # ¿Como probar la api? :test_tube:
 
