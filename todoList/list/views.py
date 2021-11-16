@@ -6,10 +6,14 @@ from list.models import Lista
 from list.serializers import ListaSerializer
 import logging
 from datetime import date, datetime
+
+
+
 logger = logging.getLogger(__name__)
 
+
 @api_view(['GET', 'POST'])
-def list_todo(request)->Response:
+def list_todo(request) -> Response:
     """
     List all todos.
     :return: Retorna la respuesta con codigo 200 si obtuvo la lista, 201 si se creo y 400 si no se pudo ejecutar
@@ -25,7 +29,8 @@ def list_todo(request)->Response:
         description = request.data.get("description")
         status_code = False
         creation_date = datetime.today().strftime('%Y-%m-%d')
-        serializer = ListaSerializer(data={"description":description, "status":status_code, "creation_date":creation_date})
+        serializer = ListaSerializer(
+            data={"description": description, "status": status_code, "creation_date": creation_date})
         logger.info('Insert Lista!')
         if serializer.is_valid():
             serializer.save()
@@ -36,7 +41,7 @@ def list_todo(request)->Response:
 
 
 @api_view(["DELETE"])
-def lista_delete(request, lista_id:int)->Response:
+def lista_delete(request, lista_id: int) -> Response:
     """
     DELETE Lista.
     :return: Retorna la respuesta con codigo 200 si obtuvo la lista y 404 si no se pudo encontrar
@@ -54,7 +59,7 @@ def lista_delete(request, lista_id:int)->Response:
 
 
 @api_view(['PUT'])
-def update_lista(request, lista_id:int)->Response:
+def update_lista(request, lista_id: int) -> Response:
     """
     UPDATE lista.
     :return: Retorna la respuesta con codigo 200 si obtuvo la lista, 201 si se creo, 400 si no lo puede ejecutar y 404 si no se pudo encontrar
@@ -73,8 +78,9 @@ def update_lista(request, lista_id:int)->Response:
         logger.info('Lista not deleted')
         return Response(f"El id {lista_id} no pudo ser encontrado", status=status.HTTP_404_NOT_FOUND)
 
+
 @api_view(['PUT'])
-def status_completed(request, lista_id:int)->Response:
+def status_completed(request, lista_id: int) -> Response:
     """
     UPDATE status.
     :return: Retorna la respuesta con codigo 200 si obtuvo la lista, 201 si se creo y 404 si no se pudo encontrar
@@ -83,7 +89,8 @@ def status_completed(request, lista_id:int)->Response:
     lista = Lista.objects.filter(id=lista_id).first()
     if not lista is None:
         status_code = True
-        serializer = ListaSerializer(lista, data={"status":status_code}, partial=True)
+        serializer = ListaSerializer(
+            lista, data={"status": status_code}, partial=True)
         logger.info('Updating lista!')
         if serializer.is_valid():
             serializer.save()
@@ -94,8 +101,9 @@ def status_completed(request, lista_id:int)->Response:
         logger.info('Lista not deleted')
         return Response(f"El id {lista_id} no pudo ser encontrado", status=status.HTTP_404_NOT_FOUND)
 
+
 @api_view(["GET"])
-def filter_lista_by(request, date:str, description:str=None)->Response:
+def filter_lista_by(request, date: str, description: str = None) -> Response:
     """
     filter Lista.
     :return: Retorna la respuesta con codigo 302 si se encontro y 404 si no se pudo ejecutar
@@ -103,7 +111,8 @@ def filter_lista_by(request, date:str, description:str=None)->Response:
     """
     if not description is None:
         logger.info('Obtaining lista with date and description!')
-        lista = Lista.objects.filter(creation_date=date, description=description).all()
+        lista = Lista.objects.filter(
+            creation_date=date, description=description).all()
         if lista.exists():
             serializer = ListaSerializer(lista, many=True)
             return Response(serializer.data, status=status.HTTP_302_FOUND)
@@ -118,4 +127,3 @@ def filter_lista_by(request, date:str, description:str=None)->Response:
         else:
             logger.info('Not found data!')
             return Response("No se encontraron datos", status=status.HTTP_404_NOT_FOUND)
-

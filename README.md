@@ -59,3 +59,9 @@ Se deben ejecutar los siguientes comandos:
 # ¿Donde ver los logs? :notebook_with_decorative_cover:
 
 Luego de ejecutar se vera un archivo debug.log
+
+
+
+# ¿Donde ver la documentacion? :books:
+
+Se documento siguiendo el esquema de OpenApi si se ingresa desde el navegador se puede ver la documentacion. Dentro del endpoint \doc se puede ver el esquema general de la api.
