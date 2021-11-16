@@ -16,8 +16,10 @@
 
 Se debe crear un virtual env con las librerias colocadas en el archivo requirements.txt. 
 
-Luego ejecutar este comando:
+Luego ejecutar estos comandos:
 
+`python manage.py makemigration`
+`python manage.py migrate`
 `python manage.py runserver`
 
 # ¿Como probar la api? :test_tube:
